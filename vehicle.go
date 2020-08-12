@@ -23,12 +23,12 @@ type bike struct {
 }
 // Values array for the feedback.json file
 type Values struct {
-	Models []Model 'json:"values"'
+	// Models []Model 'json:"values"'
 }
 // Model array for the feedback.json file
 type Model struct {
-	Name string 'json:"model"'
-	Feedback []string 'json:"feedback"'
+	// Name string 'json:"model"'
+	// Feedback []string 'json:"feedback"'
 }
 type feedbackResult struct {
 	feedbackTotal int
@@ -39,6 +39,7 @@ type feedbackResult struct {
 type rating float32
 
 vehicleResult := map[string]feedbackResult
+inventory := []vehicle
 
 const (
 	extraPositive rating = 1.2
