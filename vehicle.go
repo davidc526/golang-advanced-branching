@@ -1,12 +1,13 @@
 package main
 
-import(
+import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
 )
+
 type vehicle interface {
 }
 type car struct {
@@ -51,23 +52,23 @@ const (
 	positive      rating = 0.6
 	negative      rating = -0.6
 	initial       rating = 5.0
-	extraNegative rating = -1./*
-	func readJSONFile() Values {
-		jsonFile, err := os.Open("feedback.json")
-	
-		if err != nil {
-			log.Fatal("File not found")
+	extraNegative rating = -1. /*
+		func readJSONFile() Values {
+			jsonFile, err := os.Open("feedback.json")
+
+			if err != nil {
+				log.Fatal("File not found")
+			}
+
+			defer jsonFile.Close()
+
+			byteValue, _ := ioutil.ReadAll(jsonFile)
+			var content Values
+			json.Unmarshal(byteValue, &content)
+
+			return content
 		}
-	
-		defer jsonFile.Close()
-	
-		byteValue, _ := ioutil.ReadAll(jsonFile)
-		var content Values
-		json.Unmarshal(byteValue, &content)
-	
-		return content
-	}
-	*/2
+	*/
 )
 
 func init() {
@@ -95,7 +96,6 @@ func main() {
 	// Print ratings for the different vehicles
 }
 
-
 func readJSONFile() Values {
 	jsonFile, err := os.Open("feedback.json")
 
@@ -114,15 +114,16 @@ func readJSONFile() Values {
 
 func generateRating() {
 	f := readJSONFile()
-	for _,v := range(f.Models) {
+	for _, v := range f.Models {
 		var vehResult feedbackResult
 		var vehRating rating
-		for _,msg := range(v.Feedback) {
+		for _, msg := range v.Feedback {
+			text := strings.Split(msg, " ")
 			if len(text) >= 5 {
-				text := strings.Split(msg, " ")
+
 				vehRating = 5.0
 				vehResult.feedbackTotal++
-				for _, word := range(text) {
+				for _, word := range text {
 					s := strings.Trim(strings.ToLower(word), " ,.,,!,?,\t,\n,\r")
 					switch s {
 					case "pleasure", "impressed", "wonderful", "fantastic", "splendid":
